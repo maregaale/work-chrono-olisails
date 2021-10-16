@@ -29,6 +29,7 @@
       </form>
       
       <h2>Ore totali: {{totalHours}}</h2>
+      <button class="btn btn-dark" @click="reset">Reset</button>
 
       <div class="operator_one">
         <h4 v-if="showS1 == 1" >Operatore 1: 
@@ -38,20 +39,40 @@
 
         <button class="btn btn-success" @click="start">Start</button>
         <button class="btn btn-danger" @click="stop">Stop</button>
-        <button class="btn btn-dark" @click="reset">Reset</button>
         <p>{{formattedElapsedTime1}}</p>
       </div>
 
       <div class="operator_two">
-        <h4 v-if="showS1 == 1" >Operatore 2: 
-           <input v-on:keydown.enter="showNameS1" id="nameS2" class="name_input" type="text" placeholder="inserisci il nome dell'operatore 2" v-model="nameS2">
+        <h4 v-if="showS2 == 1" >Operatore 2: 
+           <input v-on:keydown.enter="showNameS2" id="nameS2" class="name_input" type="text" placeholder="inserisci il nome dell'operatore 2" v-model="nameS2">
         </h4>
-        <h4 v-if="showS1 == 0">Operatore {{nameS2}}:</h4>
+        <h4 v-if="showS2 == 0">Operatore {{nameS2}}:</h4>
 
-        <button class="btn btn-success" @click="start">Start</button>
-        <button class="btn btn-danger" @click="stop">Stop</button>
-        <button class="btn btn-dark" @click="reset">Reset</button>
+        <button class="btn btn-success" @click="start2">Start</button>
+        <button class="btn btn-danger" @click="stop2">Stop</button>
         <p>{{formattedElapsedTime2}}</p>
+      </div>
+
+      <div class="operator_three">
+        <h4 v-if="showS3 == 1" >Operatore 3: 
+           <input v-on:keydown.enter="showNameS3" id="nameS3" class="name_input" type="text" placeholder="inserisci il nome dell'operatore 3" v-model="nameS3">
+        </h4>
+        <h4 v-if="showS3 == 0">Operatore {{nameS3}}:</h4>
+
+        <button class="btn btn-success" @click="start3">Start</button>
+        <button class="btn btn-danger" @click="stop3">Stop</button>
+        <p>{{formattedElapsedTime3}}</p>
+      </div>
+
+      <div class="operator_four">
+        <h4 v-if="showS4 == 1" >Operatore 4: 
+           <input v-on:keydown.enter="showNameS4" id="nameS4" class="name_input" type="text" placeholder="inserisci il nome dell'operatore 4" v-model="nameS4">
+        </h4>
+        <h4 v-if="showS4 == 0">Operatore {{nameS4}}:</h4>
+
+        <button class="btn btn-success" @click="start4">Start</button>
+        <button class="btn btn-danger" @click="stop4">Stop</button>
+        <p>{{formattedElapsedTime4}}</p>
       </div>
     </div>
 
@@ -65,6 +86,9 @@
             elapsedTime3: 0,
             elapsedTime4: 0,
             timer: undefined,
+            timer2: undefined,
+            timer3: undefined,
+            timer4: undefined,
             show: 1,
             name: '',
             showS1: 1,
@@ -80,23 +104,43 @@
         },
         computed: {
           formattedElapsedTime1() {
-            const date = new Date(null);
+            let date = new Date(null);
             date.setSeconds(this.elapsedTime1 / 1000);
-            const utc = date.toUTCString();
+            let utc = date.toUTCString();
             return utc.substr(utc.indexOf(":") - 2, 8);
           },
           formattedElapsedTime2() {
-            const date = new Date(null);
+            let date = new Date(null);
             date.setSeconds(this.elapsedTime2 / 1000);
-            const utc = date.toUTCString();
+            let utc = date.toUTCString();
             return utc.substr(utc.indexOf(":") - 2, 8);
-          }
+          },
+          formattedElapsedTime3() {
+            let date = new Date(null);
+            date.setSeconds(this.elapsedTime3 / 1000);
+            let utc = date.toUTCString();
+            return utc.substr(utc.indexOf(":") - 2, 8);
+          },
+          formattedElapsedTime4() {
+            let date = new Date(null);
+            date.setSeconds(this.elapsedTime4 / 1000);
+            let utc = date.toUTCString();
+            return utc.substr(utc.indexOf(":") - 2, 8);
+          },
         },
         mounted() {
           
           this.quantity = JSON.parse(localStorage.getItem("quantity")) || []
+          this.name = JSON.parse(localStorage.getItem("name")) || []
+
 
           this.elapsedTime1 = this.quantity[0];
+
+          this.quantity[1] = this.elapsedTime2;
+
+          this.quantity[2] = this.elapsedTime3;
+
+          this.quantity[3] = this.elapsedTime4;
 
           for (let index = 0; index < this.quantity.length; index++) {
             
@@ -105,6 +149,10 @@
           }
 
           this.totalHours = parseFloat((this.totalHours / 1000 / 3600).toFixed(2));
+
+          if (this.name != '') {
+            this.show = 0;
+          }
 
         },
         // created() {
@@ -117,35 +165,128 @@
         //   },
         // },
         methods: {
+          // funzioni start
           start() {
             this.timer = setInterval(() => {
               this.elapsedTime1 += 1000;
               this.quantity[0] = this.elapsedTime1;
               localStorage.setItem("quantity", JSON.stringify(this.quantity));
 
+              this.totalHours = 0;
+
               for (let index = 0; index < this.quantity.length; index++) {
-            
+                
                 this.totalHours += this.quantity[index];
-            
+                
               }
+
+              // this.totalHours = this.totalHours / 1000 / 3600;
+
               this.totalHours = parseFloat((this.totalHours / 1000 / 3600).toFixed(2));
               
             }, 1000);
           },
+          start2() {
+            this.timer2 = setInterval(() => {
+              this.elapsedTime2 += 1000;
+              this.quantity[1] = this.elapsedTime2;
+              localStorage.setItem("quantity", JSON.stringify(this.quantity));
+
+              this.totalHours = 0;
+
+              for (let index = 0; index < this.quantity.length; index++) {
+                
+                this.totalHours += this.quantity[index];
+                
+              }
+
+              // this.totalHours = this.totalHours / 1000 / 3600;
+
+            
+              this.totalHours = parseFloat((this.totalHours / 1000 / 3600).toFixed(2));
+              
+            }, 1000);
+          },
+          start3() {
+            this.timer2 = setInterval(() => {
+              this.elapsedTime3 += 1000;
+              this.quantity[2] = this.elapsedTime3;
+              localStorage.setItem("quantity", JSON.stringify(this.quantity));
+
+              this.totalHours = 0;
+
+              for (let index = 0; index < this.quantity.length; index++) {
+                
+                this.totalHours += this.quantity[index];
+                
+              }
+
+              this.totalHours = parseFloat((this.totalHours / 1000 / 3600).toFixed(2));
+              
+            }, 1000);
+          },
+          start4() {
+            this.timer2 = setInterval(() => {
+              this.elapsedTime4 += 1000;
+              this.quantity[3] = this.elapsedTime4;
+              localStorage.setItem("quantity", JSON.stringify(this.quantity));
+
+              this.totalHours = 0;
+
+              for (let index = 0; index < this.quantity.length; index++) {
+                
+                this.totalHours += this.quantity[index];
+                
+              }
+
+              this.totalHours = parseFloat((this.totalHours / 1000 / 3600).toFixed(2));
+              
+            }, 1000);
+          },
+          // funzioni stop
           stop() {
             clearInterval(this.timer);
           },
+          stop2() {
+            clearInterval(this.timer2);
+          },
+          stop3() {
+            clearInterval(this.timer3);
+          },
+          stop4() {
+            clearInterval(this.timer4);
+          },
+          // funzioni reset
           reset() {
             this.elapsedTime1 = 0;
             this.quantity[0] = this.elapsedTime1;
-              localStorage.setItem("quantity", JSON.stringify(this.quantity));
+            this.elapsedTime2 = 0;
+            this.quantity[1] = this.elapsedTime2;
+            
+            localStorage.setItem("quantity", JSON.stringify(this.quantity));
             this.totalHours = 0;
+
+            this.show = 1;
+            this.name = "";
           },
           showName() {
               this.show = 0;
+
+              localStorage.setItem("name", JSON.stringify(this.name));
+
           },
+          // funzioni mostra nome operatori
           showNameS1() {
               this.showS1 = 0;
+          },
+          showNameS2() {
+              this.showS2 = 0;
+          },
+          showNameS3() {
+              this.showS3 = 0;
+          },
+          showNameS4() {
+              this.showS4 = 0;
           }
         }
       });
