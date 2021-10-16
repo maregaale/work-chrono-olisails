@@ -268,6 +268,18 @@
 
             this.show = 1;
             this.name = "";
+
+            this.showS1 = 1;
+            this.nameS1 = "";
+
+            this.showS2 = 1;
+            this.nameS2 = "";
+
+            this.showS3 = 1;
+            this.nameS3 = "";
+
+            this.showS4 = 1;
+            this.nameS4 = "";
           },
           showName() {
               this.show = 0;
@@ -278,15 +290,26 @@
           // funzioni mostra nome operatori
           showNameS1() {
               this.showS1 = 0;
+
+              localStorage.setItem("nameS1", JSON.stringify(this.nameS1));
           },
           showNameS2() {
               this.showS2 = 0;
+
+              localStorage.setItem("nameS2", JSON.stringify(this.nameS2));
+
           },
           showNameS3() {
               this.showS3 = 0;
+
+              localStorage.setItem("nameS3", JSON.stringify(this.nameS3));
+
           },
           showNameS4() {
               this.showS4 = 0;
+
+              localStorage.setItem("nameS4", JSON.stringify(this.nameS4));
+
           }
         }
       });
