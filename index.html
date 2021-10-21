@@ -22,62 +22,318 @@
   <body>
     <div class="container pt-3" id="app">
       <h1 class="text-center">Work Chrono Olisails</h1>
-
-      <div class="text-center mt-3">
-        <button class="btn btn-dark" @click="reset">Reset</button>
-      </div>
-
-      <form class="mt-3 mb-3" action="">
-        <label for="name"><h4>Nome del lavoro:</h4></label>
-        <input v-if="show == 1" v-on:keydown.enter="showName" id="name" class="form-control" type="text" placeholder="inserisci il nome del lavoro" v-model="name"> 
-        <h4 v-if="show == 0">{{name}}</h4>
-      </form>
       
-      <h2 class="text-center mt-4 mb-4">Ore totali: {{totalHours}}</h2>
+      <!-- lavoro 1 -->
+      <div class="work_one pt-5 pb-5 px-4">
+        <form class="mt-3 mb-3" action="">
+          <label for="name1"><h4>Nome del lavoro:</h4></label>
+          <input v-if="show1 == 1" v-on:keydown.enter="showName1" id="name1" class="form-control name_work" type="text" placeholder="inserisci il nome del lavoro" v-model="name1"> 
+          <h4 v-if="show1 == 0">{{name1}}</h4>
+        </form>
+  
+        <div class="text-center mt-5 mb-5">
+          <button class="btn btn-dark" @click="reset1">Reset</button>
+        </div>
+        
+        <div class="d-flex justify-content-around">
+          <h2 class="text-center mt-4 mb-4 pr-5">Ore totali: {{totalHours1}}</h2>
+
+          <div class="cost ml-5">
+            Coefficiente orario:
+            <select v-on:change="coefficient()" v-model="selectedCoefficient" name="coefficient" id="coefficients_select">
+              <option value="50" selected="{selectedCoefficient == 50 ? 'selected' : null}">50</option>
+              <option value="60" selected="{selectedCoefficient == 60 ? 'selected' : null}">60</option>
+              <option value="70" selected="{selectedCoefficient == 70 ? 'selected' : null}">70</option>
+              <option value="80" selected="{selectedCoefficient == 80 ? 'selected' : null}">80</option>
+              <option value="90" selected="{selectedCoefficient == 50 ? 'selected' : null}">90</option>
+              <option value="100" selected="{selectedCoefficient == 100 ? 'selected' : null}">100</option>
+            </select>
+            <h2 class="text-center mt-4 mb-4">&euro; totali: {{totalCost1}}</h2>
+
+          </div>
+        </div>
+  
+        <div class="operator_one">
+          <h4 v-if="show1S1 == 1" >Operatore 1: 
+             <input v-on:keydown.enter="showName1S1" id="name1S1" class="name_input" type="text" placeholder="inserisci il nome dell'operatore 1" v-model="name1S1">
+          </h4>
+          <h4 v-if="show1S1 == 0">Operatore {{name1S1}}:</h4>
+  
+          <button class="btn btn-success" @click="start1">Start</button>
+          <button class="btn btn-danger" @click="stop1">Stop</button>
+          <p>{{formattedElapsedTime11}}</p>
+        </div>
+  
+        <div class="operator_two">
+          <h4 v-if="show1S2 == 1" >Operatore 2: 
+             <input v-on:keydown.enter="showName1S2" id="name1S2" class="name_input" type="text" placeholder="inserisci il nome dell'operatore 2" v-model="name1S2">
+          </h4>
+          <h4 v-if="show1S2 == 0">Operatore {{name1S2}}:</h4>
+  
+          <button class="btn btn-success" @click="start12">Start</button>
+          <button class="btn btn-danger" @click="stop12">Stop</button>
+          <p>{{formattedElapsedTime12}}</p>
+        </div>
+  
+        <div class="operator_three">
+          <h4 v-if="show1S3 == 1" >Operatore 3: 
+             <input v-on:keydown.enter="showName1S3" id="name1S3" class="name_input" type="text" placeholder="inserisci il nome dell'operatore 3" v-model="name1S3">
+          </h4>
+          <h4 v-if="show1S3 == 0">Operatore {{name1S3}}:</h4>
+  
+          <button class="btn btn-success" @click="start13">Start</button>
+          <button class="btn btn-danger" @click="stop13">Stop</button>
+          <p>{{formattedElapsedTime13}}</p>
+        </div>
+  
+        <div class="operator_four">
+          <h4 v-if="show1S4 == 1" >Operatore 4: 
+             <input v-on:keydown.enter="showName1S4" id="name1S4" class="name_input" type="text" placeholder="inserisci il nome dell'operatore 4" v-model="name1S4">
+          </h4>
+          <h4 v-if="show1S4 == 0">Operatore {{name1S4}}:</h4>
+  
+          <button class="btn btn-success" @click="start14">Start</button>
+          <button class="btn btn-danger" @click="stop14">Stop</button>
+          <p>{{formattedElapsedTime14}}</p>
+        </div>
+      </div>
+      <!-- /lavoro 1 -->
+
+      <hr>
+
+
+      <!-- lavoro 2 -->
+      <div class="work_two pt-5 pb-5 px-4">
+      <form class="mt-3 mb-3" action="">
+        <label for="name2"><h4>Nome del lavoro:</h4></label>
+        <input v-if="show2 == 1" v-on:keydown.enter="showName2" id="name2" class="form-control name_work" type="text" placeholder="inserisci il nome del lavoro" v-model="name2"> 
+        <h4 v-if="show2 == 0">{{name2}}</h4>
+      </form>
+
+      <div class="text-center mt-5 mb-5">
+        <button class="btn btn-dark" @click="reset2">Reset</button>
+      </div>
+      
+      <div class="d-flex justify-content-around">
+        <h2 class="text-center mt-4 mb-4 pr-5">Ore totali: {{totalHours2}}</h2>
+
+        <div class="cost ml-5">
+          Coefficiente orario:
+          <select v-on:change="coefficient2()" v-model="selectedCoefficient2" name="coefficient" id="coefficients_select">
+            <option value="50" selected="{selectedCoefficient2 == 50 ? 'selected' : null}">50</option>
+            <option value="60" selected="{selectedCoefficient2 == 60 ? 'selected' : null}">60</option>
+            <option value="70" selected="{selectedCoefficient2 == 70 ? 'selected' : null}">70</option>
+            <option value="80" selected="{selectedCoefficient2 == 80 ? 'selected' : null}">80</option>
+            <option value="90" selected="{selectedCoefficient2 == 50 ? 'selected' : null}">90</option>
+            <option value="100" selected="{selectedCoefficient2 == 100 ? 'selected' : null}">100</option>
+          </select>
+          <h2 class="text-center mt-4 mb-4">&euro; totali: {{totalCost2}}</h2>
+
+        </div>
+      </div>
 
       <div class="operator_one">
-        <h4 v-if="showS1 == 1" >Operatore 1: 
-           <input v-on:keydown.enter="showNameS1" id="nameS1" class="name_input" type="text" placeholder="inserisci il nome dell'operatore 1" v-model="nameS1">
+        <h4 v-if="show2S1 == 1" >Operatore 1: 
+            <input v-on:keydown.enter="showName2S1" id="name2S1" class="name_input" type="text" placeholder="inserisci il nome dell'operatore 1" v-model="name2S1">
         </h4>
-        <h4 v-if="showS1 == 0">Operatore {{nameS1}}:</h4>
-
-        <button class="btn btn-success" @click="start">Start</button>
-        <button class="btn btn-danger" @click="stop">Stop</button>
-        <p>{{formattedElapsedTime1}}</p>
-      </div>
-
-      <div class="operator_two">
-        <h4 v-if="showS2 == 1" >Operatore 2: 
-           <input v-on:keydown.enter="showNameS2" id="nameS2" class="name_input" type="text" placeholder="inserisci il nome dell'operatore 2" v-model="nameS2">
-        </h4>
-        <h4 v-if="showS2 == 0">Operatore {{nameS2}}:</h4>
+        <h4 v-if="show2S1 == 0">Operatore {{name2S1}}:</h4>
 
         <button class="btn btn-success" @click="start2">Start</button>
         <button class="btn btn-danger" @click="stop2">Stop</button>
-        <p>{{formattedElapsedTime2}}</p>
+        <p>{{formattedElapsedTime21}}</p>
+      </div>
+
+      <div class="operator_two">
+        <h4 v-if="show2S2 == 1" >Operatore 2: 
+            <input v-on:keydown.enter="showName2S2" id="name2S2" class="name_input" type="text" placeholder="inserisci il nome dell'operatore 2" v-model="name2S2">
+        </h4>
+        <h4 v-if="show2S2 == 0">Operatore {{name2S2}}:</h4>
+
+        <button class="btn btn-success" @click="start22">Start</button>
+        <button class="btn btn-danger" @click="stop22">Stop</button>
+        <p>{{formattedElapsedTime22}}</p>
       </div>
 
       <div class="operator_three">
-        <h4 v-if="showS3 == 1" >Operatore 3: 
-           <input v-on:keydown.enter="showNameS3" id="nameS3" class="name_input" type="text" placeholder="inserisci il nome dell'operatore 3" v-model="nameS3">
+        <h4 v-if="show2S3 == 1" >Operatore 3: 
+            <input v-on:keydown.enter="showName2S3" id="name2S3" class="name_input" type="text" placeholder="inserisci il nome dell'operatore 3" v-model="name2S3">
         </h4>
-        <h4 v-if="showS3 == 0">Operatore {{nameS3}}:</h4>
+        <h4 v-if="show2S3 == 0">Operatore {{name2S3}}:</h4>
 
-        <button class="btn btn-success" @click="start3">Start</button>
-        <button class="btn btn-danger" @click="stop3">Stop</button>
-        <p>{{formattedElapsedTime3}}</p>
+        <button class="btn btn-success" @click="start23">Start</button>
+        <button class="btn btn-danger" @click="stop23">Stop</button>
+        <p>{{formattedElapsedTime23}}</p>
       </div>
 
       <div class="operator_four">
-        <h4 v-if="showS4 == 1" >Operatore 4: 
-           <input v-on:keydown.enter="showNameS4" id="nameS4" class="name_input" type="text" placeholder="inserisci il nome dell'operatore 4" v-model="nameS4">
+        <h4 v-if="show2S4 == 1" >Operatore 4: 
+            <input v-on:keydown.enter="showName2S4" id="name2S4" class="name_input" type="text" placeholder="inserisci il nome dell'operatore 4" v-model="name2S4">
         </h4>
-        <h4 v-if="showS4 == 0">Operatore {{nameS4}}:</h4>
+        <h4 v-if="show2S4 == 0">Operatore {{name2S4}}:</h4>
 
-        <button class="btn btn-success" @click="start4">Start</button>
-        <button class="btn btn-danger" @click="stop4">Stop</button>
-        <p>{{formattedElapsedTime4}}</p>
+        <button class="btn btn-success" @click="start24">Start</button>
+        <button class="btn btn-danger" @click="stop24">Stop</button>
+        <p>{{formattedElapsedTime24}}</p>
       </div>
+      </div>
+      <!-- /lavoro 2 -->
+
+      <hr>
+
+      <!-- lavoro 3 -->
+      <div class="work_three pt-5 pb-5 px-4">
+        <form class="mt-3 mb-3" action="">
+          <label for="name3"><h4>Nome del lavoro:</h4></label>
+          <input v-if="show3 == 1" v-on:keydown.enter="showName3" id="name3" class="form-control name_work" type="text" placeholder="inserisci il nome del lavoro" v-model="name3"> 
+          <h4 v-if="show3 == 0">{{name3}}</h4>
+        </form>
+  
+        <div class="text-center mt-5 mb-5">
+          <button class="btn btn-dark" @click="reset3">Reset</button>
+        </div>
+        
+        <div class="d-flex justify-content-around">
+          <h2 class="text-center mt-4 mb-4 pr-5">Ore totali: {{totalHours3}}</h2>
+  
+          <div class="cost ml-5">
+            Coefficiente orario:
+            <select v-on:change="coefficient3()" v-model="selectedCoefficient3" name="coefficient" id="coefficients_select">
+              <option value="50" selected="{selectedCoefficient2 == 50 ? 'selected' : null}">50</option>
+              <option value="60" selected="{selectedCoefficient2 == 60 ? 'selected' : null}">60</option>
+              <option value="70" selected="{selectedCoefficient2 == 70 ? 'selected' : null}">70</option>
+              <option value="80" selected="{selectedCoefficient2 == 80 ? 'selected' : null}">80</option>
+              <option value="90" selected="{selectedCoefficient2 == 50 ? 'selected' : null}">90</option>
+              <option value="100" selected="{selectedCoefficient2 == 100 ? 'selected' : null}">100</option>
+            </select>
+            <h2 class="text-center mt-4 mb-4">&euro; totali: {{totalCost3}}</h2>
+  
+          </div>
+        </div>
+  
+        <div class="operator_one">
+          <h4 v-if="show3S1 == 1" >Operatore 1: 
+              <input v-on:keydown.enter="showName3S1" id="name3S1" class="name_input" type="text" placeholder="inserisci il nome dell'operatore 1" v-model="name3S1">
+          </h4>
+          <h4 v-if="show3S1 == 0">Operatore {{name3S1}}:</h4>
+  
+          <button class="btn btn-success" @click="start3">Start</button>
+          <button class="btn btn-danger" @click="stop3">Stop</button>
+          <p>{{formattedElapsedTime31}}</p>
+        </div>
+  
+        <div class="operator_two">
+          <h4 v-if="show3S2 == 1" >Operatore 2: 
+              <input v-on:keydown.enter="showName3S2" id="name3S2" class="name_input" type="text" placeholder="inserisci il nome dell'operatore 2" v-model="name3S2">
+          </h4>
+          <h4 v-if="show3S2 == 0">Operatore {{name3S2}}:</h4>
+  
+          <button class="btn btn-success" @click="start32">Start</button>
+          <button class="btn btn-danger" @click="stop32">Stop</button>
+          <p>{{formattedElapsedTime32}}</p>
+        </div>
+  
+        <div class="operator_three">
+          <h4 v-if="show3S3 == 1" >Operatore 3: 
+              <input v-on:keydown.enter="showName3S3" id="name3S3" class="name_input" type="text" placeholder="inserisci il nome dell'operatore 3" v-model="name3S3">
+          </h4>
+          <h4 v-if="show3S3 == 0">Operatore {{name3S3}}:</h4>
+  
+          <button class="btn btn-success" @click="start33">Start</button>
+          <button class="btn btn-danger" @click="stop33">Stop</button>
+          <p>{{formattedElapsedTime33}}</p>
+        </div>
+  
+        <div class="operator_four">
+          <h4 v-if="show3S4 == 1" >Operatore 4: 
+              <input v-on:keydown.enter="showName3S4" id="name3S4" class="name_input" type="text" placeholder="inserisci il nome dell'operatore 4" v-model="name3S4">
+          </h4>
+          <h4 v-if="show3S4 == 0">Operatore {{name3S4}}:</h4>
+  
+          <button class="btn btn-success" @click="start34">Start</button>
+          <button class="btn btn-danger" @click="stop34">Stop</button>
+          <p>{{formattedElapsedTime34}}</p>
+        </div>
+      </div>
+      <!-- /lavoro 3 -->
+
+      <hr>
+
+      <!-- lavoro 4 -->
+      <div class="work_four pt-5 pb-5 px-4">
+        <form class="mt-3 mb-3" action="">
+          <label for="name4"><h4>Nome del lavoro:</h4></label>
+          <input v-if="show4 == 1" v-on:keydown.enter="showName4" id="name4" class="form-control name_work" type="text" placeholder="inserisci il nome del lavoro" v-model="name4"> 
+          <h4 v-if="show4 == 0">{{name4}}</h4>
+        </form>
+  
+        <div class="text-center mt-5 mb-5">
+          <button class="btn btn-dark" @click="reset4">Reset</button>
+        </div>
+        
+        <div class="d-flex justify-content-around">
+          <h2 class="text-center mt-4 mb-4 pr-5">Ore totali: {{totalHours4}}</h2>
+  
+          <div class="cost ml-5">
+            Coefficiente orario:
+            <select v-on:change="coefficient4()" v-model="selectedCoefficient4" name="coefficient" id="coefficients_select">
+              <option value="50" selected="{selectedCoefficient2 == 50 ? 'selected' : null}">50</option>
+              <option value="60" selected="{selectedCoefficient2 == 60 ? 'selected' : null}">60</option>
+              <option value="70" selected="{selectedCoefficient2 == 70 ? 'selected' : null}">70</option>
+              <option value="80" selected="{selectedCoefficient2 == 80 ? 'selected' : null}">80</option>
+              <option value="90" selected="{selectedCoefficient2 == 50 ? 'selected' : null}">90</option>
+              <option value="100" selected="{selectedCoefficient2 == 100 ? 'selected' : null}">100</option>
+            </select>
+            <h2 class="text-center mt-4 mb-4">&euro; totali: {{totalCost4}}</h2>
+  
+          </div>
+        </div>
+  
+        <div class="operator_one">
+          <h4 v-if="show4S1 == 1" >Operatore 1: 
+              <input v-on:keydown.enter="showName4S1" id="name4S1" class="name_input" type="text" placeholder="inserisci il nome dell'operatore 1" v-model="name4S1">
+          </h4>
+          <h4 v-if="show4S1 == 0">Operatore {{name4S1}}:</h4>
+  
+          <button class="btn btn-success" @click="start4">Start</button>
+          <button class="btn btn-danger" @click="stop4">Stop</button>
+          <p>{{formattedElapsedTime41}}</p>
+        </div>
+  
+        <div class="operator_two">
+          <h4 v-if="show4S2 == 1" >Operatore 2: 
+              <input v-on:keydown.enter="showName4S2" id="name4S2" class="name_input" type="text" placeholder="inserisci il nome dell'operatore 2" v-model="name4S2">
+          </h4>
+          <h4 v-if="show4S2 == 0">Operatore {{name4S2}}:</h4>
+  
+          <button class="btn btn-success" @click="start42">Start</button>
+          <button class="btn btn-danger" @click="stop42">Stop</button>
+          <p>{{formattedElapsedTime42}}</p>
+        </div>
+  
+        <div class="operator_three">
+          <h4 v-if="show4S3 == 1" >Operatore 3: 
+              <input v-on:keydown.enter="showName4S3" id="name4S3" class="name_input" type="text" placeholder="inserisci il nome dell'operatore 3" v-model="name4S3">
+          </h4>
+          <h4 v-if="show4S3 == 0">Operatore {{name4S3}}:</h4>
+  
+          <button class="btn btn-success" @click="start43">Start</button>
+          <button class="btn btn-danger" @click="stop43">Stop</button>
+          <p>{{formattedElapsedTime43}}</p>
+        </div>
+  
+        <div class="operator_four">
+          <h4 v-if="show4S4 == 1" >Operatore 4: 
+              <input v-on:keydown.enter="showName4S4" id="name4S4" class="name_input" type="text" placeholder="inserisci il nome dell'operatore 4" v-model="name4S4">
+          </h4>
+          <h4 v-if="show4S4 == 0">Operatore {{name4S4}}:</h4>
+  
+          <button class="btn btn-success" @click="start44">Start</button>
+          <button class="btn btn-danger" @click="stop44">Stop</button>
+          <p>{{formattedElapsedTime44}}</p>
+        </div>
+      </div>
+      <!-- /lavoro 4 -->
+
     </div>
 
     <script src="js/script.js"></script>
