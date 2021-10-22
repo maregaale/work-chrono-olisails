@@ -9,10 +9,15 @@
 
 .name_work {
   width: 450px;
+  margin: auto;
 }
 
 hr {
-  border: 1px solid;
+  height: 1px;
+  display: block;
+  border: 0;
+  color:black;
+  border-style: solid;
 }
 
 .work_one {
@@ -25,6 +30,14 @@ hr {
 
 .work_four {
   background-color: #F5F5F5;
+}
+
+/* .work_one, .work_two, .work_three, .work_four {
+  max-height: calc(100vh - 70px);
+} */
+
+.operators {
+  padding: 30px 0;
 }
 
 
